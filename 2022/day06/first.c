@@ -24,20 +24,23 @@ int main(int argc, char* argv[]) {
 
             // start comparing after 4th iteration
             if(i > 2) {
-                if(packets[0] != packets[1] &&
-                   packets[0] != packets[2] &&
-                   packets[0] != packets[3] &&
-                   packets[1] != packets[0] &&
-                   packets[1] != packets[2] &&
-                   packets[1] != packets[3] &&
-                   packets[2] != packets[0] &&
-                   packets[2] != packets[1] &&
-                   packets[2] != packets[3] &&
-                   packets[3] != packets[0] &&
-                   packets[3] != packets[1] &&
-                   packets[3] != packets[2]
-                        ) {
-                    printf("%d\n", i+1);
+                int flag = 0;
+                for(int i = 0; i < 4; i++) {
+                    for(int j = 0; j < 4; j++) {
+                        if(i == j) continue;
+
+                        if(packets[i] == packets[j]) {
+                            flag = 0;
+                            break;
+                        } else {
+                            flag = 1;
+                        }
+                    }
+                    if(flag == 0) break;
+                }
+
+                if(flag == 1) {
+                    printf("result: %d\n", i+1);
                     break;
                 }
             }
